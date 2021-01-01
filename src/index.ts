@@ -1,33 +1,14 @@
-import core from '@actions/core';
-import { CreateRequest, WebsiteshotController } from './websiteshot.controller';
+import core from '@actions/core'
+import { Runner } from './controller/runner.controller'
+import { Validation } from './controller/validation.controller'
 
 async function run() {
-  const projectId = process.env.PROJECT_ID;
-  const apikey = process.env.API_KEY;
-  const url = process.env.URL;
-
-  const request: CreateRequest = {
-    projectId,
-    apikey,
-    screenshotParameter: {
-      width: 1200,
-      height: 720,
-    },
-    urls: [
-      {
-        url,
-        name: url,
-      },
-    ],
-  };
-
-  const websiteshotController = new WebsiteshotController(request);
-
   try {
-    await websiteshotController.scheduleJob();
+    Validation.checkEnvVars()
+    await Runner.run()
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error.message)
   }
 }
 
-run();
+run()
