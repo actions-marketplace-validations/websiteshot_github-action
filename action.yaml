@@ -1,0 +1,7 @@
+name: "Websiteshot"
+
+description: "Github Action to schedule a new Screenshot Job with Websiteshot."
+
+runs:
+  using: "node14"
+  main: "dist/index.js"
