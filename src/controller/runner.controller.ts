@@ -5,12 +5,13 @@ import {
   Url,
   WebsiteshotController,
 } from '@websiteshot/nodejs-client'
+import { EnvVar, EnvVarOptional } from '../enums/EnvVar.enum'
 
 export class Runner {
   public static async run() {
     const config: Config = {
-      projectId: String(process.env.PROJECT_ID),
-      apikey: String(process.env.API_KEY),
+      projectId: String(process.env[EnvVar.PROJECT_ID]),
+      apikey: String(process.env[EnvVar.API_KEY]),
     }
 
     const websiteshotController: WebsiteshotController = new WebsiteshotController(
@@ -22,16 +23,26 @@ export class Runner {
       height: 720,
     }
 
-    const urls: Url[] = [
-      {
-        url: String(process.env.URL),
-        name: String(process.env.URL),
-      },
-    ]
+    const urls: Url[] = JSON.parse(String(process.env[EnvVar.URLS]))
+
+    const scheduledTs = process.env[EnvVarOptional.SCHEDULE_TS]
+      ? Number(process.env[EnvVarOptional.SCHEDULE_TS])
+      : undefined
+    const scheduleUnit = process.env[EnvVarOptional.SCHEDULE_UNIT]
+      ? String(process.env[EnvVarOptional.SCHEDULE_UNIT])
+      : undefined
+    const scheduleValue = process.env[EnvVarOptional.SCHEDULE_VALUE]
+      ? String(process.env[EnvVarOptional.SCHEDULE_VALUE])
+      : undefined
 
     const createRequest: CreateRequest = {
       screenshotParameter,
       urls,
+      scheduledTs,
+      scheduleDescription:
+        scheduleUnit && scheduleValue
+          ? { value: scheduleValue, unit: scheduleUnit }
+          : undefined,
     }
 
     await websiteshotController.create(createRequest)
