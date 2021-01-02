@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@websiteshot/nodejs-client": "0.0.3"
+    "@websiteshot/nodejs-client": "0.0.4"
   },
   "devDependencies": {
     "@types/jasmine": "^3.5.11",
