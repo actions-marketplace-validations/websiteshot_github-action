@@ -2,6 +2,10 @@ name: "Websiteshot"
 
 description: "Github Action to schedule a new Screenshot Job with Websiteshot."
 
+branding:
+  icon: "camera"
+  color: "blue"
+
 runs:
   using: "docker"
   image: "Dockerfile"
