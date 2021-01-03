@@ -1,6 +1,6 @@
 {
   "name": "@websiteshot/github-action",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Github Action to schedule a new Screenshot Job with Websiteshot.",
   "main": "index.ts",
   "scripts": {
@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@websiteshot/nodejs-client": "0.0.4"
+    "@websiteshot/nodejs-client": "0.0.5"
   },
   "devDependencies": {
     "@types/jasmine": "^3.5.11",
