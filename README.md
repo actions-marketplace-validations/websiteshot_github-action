@@ -45,7 +45,7 @@ name: Publish
 on: [push]
 
 jobs:
-  test:
+  create-screenshot:
     runs-on: ubuntu-latest
     name: 'Schedule Screenshot Creation'
     steps:

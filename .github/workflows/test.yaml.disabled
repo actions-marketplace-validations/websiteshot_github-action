@@ -3,7 +3,7 @@ name: Publish
 on: [push]
 
 jobs:
-  test:
+  create-screenshot:
     runs-on: ubuntu-latest
     name: "test"
     steps:

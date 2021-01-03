@@ -5,7 +5,8 @@ const core = require('@actions/core')
 async function run() {
   try {
     Validation.checkEnvVars()
-    await Runner.run()
+    const jobId: string = await Runner.run()
+    core.info(`Created Job with Id: ${jobId}`)
   } catch (error) {
     core.setFailed(error.message)
   }

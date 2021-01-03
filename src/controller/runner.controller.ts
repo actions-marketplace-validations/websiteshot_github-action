@@ -1,6 +1,7 @@
 import {
   Config,
   CreateRequest,
+  CreateResponse,
   ScreenshotParameter,
   Url,
   WebsiteshotController,
@@ -8,7 +9,7 @@ import {
 import { EnvVar, EnvVarOptional } from '../enums/EnvVar.enum'
 
 export class Runner {
-  public static async run() {
+  public static async run(): Promise<string> {
     const config: Config = {
       projectId: String(process.env[EnvVar.PROJECT_ID]),
       apikey: String(process.env[EnvVar.API_KEY]),
@@ -45,6 +46,9 @@ export class Runner {
           : undefined,
     }
 
-    await websiteshotController.create(createRequest)
+    const response: CreateResponse = await websiteshotController.create(
+      createRequest,
+    )
+    return response.jobId
   }
 }
