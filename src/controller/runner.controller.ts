@@ -24,19 +24,27 @@ export class Runner {
       height: 720,
     }
 
-    const urls: Url[] = JSON.parse(String(process.env[EnvVar.URLS]))
+    const templateId = process.env[EnvVarOptional.TEMPLATE_ID]
+      ? process.env[EnvVarOptional.TEMPLATE_ID]
+      : undefined
+    const urls: Url[] = process.env[EnvVarOptional.URLS]
+      ? JSON.parse(String(process.env[EnvVarOptional.URLS]))
+      : undefined
 
     const scheduledTs = process.env[EnvVarOptional.SCHEDULE_TS]
       ? Number(process.env[EnvVarOptional.SCHEDULE_TS])
       : undefined
-    const scheduleUnit = process.env[EnvVarOptional.SCHEDULE_UNIT]
-      ? String(process.env[EnvVarOptional.SCHEDULE_UNIT])
+    const scheduleUnit: 'm' | 'h' | 'd' = process.env[
+      EnvVarOptional.SCHEDULE_UNIT
+    ]
+      ? (String(process.env[EnvVarOptional.SCHEDULE_UNIT]) as 'm' | 'h' | 'd')
       : undefined
     const scheduleValue = process.env[EnvVarOptional.SCHEDULE_VALUE]
-      ? String(process.env[EnvVarOptional.SCHEDULE_VALUE])
+      ? Number(process.env[EnvVarOptional.SCHEDULE_VALUE])
       : undefined
 
     const createRequest: CreateRequest = {
+      templateId,
       screenshotParameter,
       urls,
       scheduledTs,
